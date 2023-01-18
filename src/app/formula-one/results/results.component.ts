@@ -30,7 +30,7 @@ export class ResultsComponent implements OnInit {
     'position',
     'firstName',
     'lastName',
-    'wins',
+
     'points',
     'laps',
     'nationality',
