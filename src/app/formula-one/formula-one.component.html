@@ -1,0 +1,46 @@
+<div class="container">
+  <ng-container *ngIf="seasonsList$ | async as seasonsList">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose One Season</mat-label>
+      <mat-select (selectionChange)="onSeasonChange($event)">
+        <mat-option *ngFor="let season of seasonsList" [value]="season.season">
+          {{ season.season }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <ng-container *ngIf="raceResults$ | async as races">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose One Race</mat-label>
+        <mat-select (selectionChange)="onRaceChange($event)">
+          <mat-option *ngFor="let race of races" [value]="race.round">
+            {{ race.raceName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+  </ng-container>
+
+  <mat-tab-group>
+    <mat-tab label="Drivers">
+      <ng-container *ngIf="drivers$ | async as drivers">
+        <app-drivers [dataSource]="drivers"> </app-drivers>
+      </ng-container>
+    </mat-tab>
+    <mat-tab label="Result by Race" class="cards">
+      <ng-container *ngIf="raceSelected$ | async as raceSelected">
+        <app-results [dataSource]="raceSelected"> </app-results>
+      </ng-container>
+    </mat-tab>
+    <mat-tab label="Standings">
+      <ng-container *ngIf="standings$ | async as standings">
+        <app-standings [dataSource]="standings"> </app-standings> </ng-container
+    ></mat-tab>
+
+    <mat-tab label="Qualifying Results">
+      <ng-container *ngIf="qualifyingResults$ | async as qualifyingResults">
+        <app-qualify-results [dataSource]="qualifyingResults">
+        </app-qualify-results> </ng-container
+    ></mat-tab>
+  </mat-tab-group>
+</div>
